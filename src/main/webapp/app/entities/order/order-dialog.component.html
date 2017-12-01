@@ -1,0 +1,135 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myOrderLabel">Create or edit a Order</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!order.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="order.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_customerId">Customer Id</label>
+            <input type="text" class="form-control" name="customerId" id="field_customerId"
+                [(ngModel)]="order.customerId" required />
+            <div [hidden]="!(editForm.controls.customerId?.dirty && editForm.controls.customerId?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.customerId?.errors?.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_customerName">Customer Name</label>
+            <input type="text" class="form-control" name="customerName" id="field_customerName"
+                [(ngModel)]="order.customerName" required />
+            <div [hidden]="!(editForm.controls.customerName?.dirty && editForm.controls.customerName?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.customerName?.errors?.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_shippingDetail">Shipping Detail</label>
+            <input type="text" class="form-control" name="shippingDetail" id="field_shippingDetail"
+                [(ngModel)]="order.shippingDetail" required />
+            <div [hidden]="!(editForm.controls.shippingDetail?.dirty && editForm.controls.shippingDetail?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.shippingDetail?.errors?.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_productName">Product Name</label>
+            <input type="text" class="form-control" name="productName" id="field_productName"
+                [(ngModel)]="order.productName" required />
+            <div [hidden]="!(editForm.controls.productName?.dirty && editForm.controls.productName?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.productName?.errors?.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_productDetail">Product Detail</label>
+            <input type="text" class="form-control" name="productDetail" id="field_productDetail"
+                [(ngModel)]="order.productDetail" required />
+            <div [hidden]="!(editForm.controls.productDetail?.dirty && editForm.controls.productDetail?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.productDetail?.errors?.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_productSize">Product Size</label>
+            <input type="number" class="form-control" name="productSize" id="field_productSize"
+                [(ngModel)]="order.productSize" required />
+            <div [hidden]="!(editForm.controls.productSize?.dirty && editForm.controls.productSize?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.productSize?.errors?.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.productSize?.errors?.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_productPrice">Product Price</label>
+            <input type="number" class="form-control" name="productPrice" id="field_productPrice"
+                [(ngModel)]="order.productPrice" required />
+            <div [hidden]="!(editForm.controls.productPrice?.dirty && editForm.controls.productPrice?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.productPrice?.errors?.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.productPrice?.errors?.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_moneyPaid">Money Paid</label>
+            <input type="number" class="form-control" name="moneyPaid" id="field_moneyPaid"
+                [(ngModel)]="order.moneyPaid" required />
+            <div [hidden]="!(editForm.controls.moneyPaid?.dirty && editForm.controls.moneyPaid?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.moneyPaid?.errors?.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.moneyPaid?.errors?.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_status">Status</label>
+            <input type="number" class="form-control" name="status" id="field_status"
+                [(ngModel)]="order.status"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_note">Note</label>
+            <input type="text" class="form-control" name="note" id="field_note"
+                [(ngModel)]="order.note"  />
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

@@ -1,0 +1,61 @@
+
+<div *ngIf="order">
+    <h2><span>Order</span> {{order.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Customer Id</span></dt>
+        <dd>
+            <span>{{order.customerId}}</span>
+        </dd>
+        <dt><span>Customer Name</span></dt>
+        <dd>
+            <span>{{order.customerName}}</span>
+        </dd>
+        <dt><span>Shipping Detail</span></dt>
+        <dd>
+            <span>{{order.shippingDetail}}</span>
+        </dd>
+        <dt><span>Product Name</span></dt>
+        <dd>
+            <span>{{order.productName}}</span>
+        </dd>
+        <dt><span>Product Detail</span></dt>
+        <dd>
+            <span>{{order.productDetail}}</span>
+        </dd>
+        <dt><span>Product Size</span></dt>
+        <dd>
+            <span>{{order.productSize}}</span>
+        </dd>
+        <dt><span>Product Price</span></dt>
+        <dd>
+            <span>{{order.productPrice}}</span>
+        </dd>
+        <dt><span>Money Paid</span></dt>
+        <dd>
+            <span>{{order.moneyPaid}}</span>
+        </dd>
+        <dt><span>Status</span></dt>
+        <dd>
+            <span>{{order.status}}</span>
+        </dd>
+        <dt><span>Note</span></dt>
+        <dd>
+            <span>{{order.note}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'order/'+ order.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>

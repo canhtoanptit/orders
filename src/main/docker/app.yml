@@ -1,0 +1,15 @@
+version: '2'
+services:
+    quyenbeo_admin-app:
+        image: quyenbeo_admin
+        environment:
+            - SPRING_PROFILES_ACTIVE=prod,swagger
+            - SPRING_DATA_MONGODB_URI=mongodb://quyenbeo_admin-mongodb:27017
+            - SPRING_DATA_MONGODB_DATABASE=quyenbeo_admin
+            - JHIPSTER_SLEEP=10 # gives time for the database to boot before the application
+        ports:
+            - 8080:8080
+    quyenbeo_admin-mongodb:
+        extends:
+            file: mongodb.yml
+            service: quyenbeo_admin-mongodb
