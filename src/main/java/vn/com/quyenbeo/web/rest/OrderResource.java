@@ -1,17 +1,8 @@
 package vn.com.quyenbeo.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
-import com.sun.javaws.exceptions.InvalidArgumentException;
-import vn.com.quyenbeo.config.Constants;
-import vn.com.quyenbeo.domain.Customer;
-import vn.com.quyenbeo.domain.Order;
-import vn.com.quyenbeo.service.CustomerService;
-import vn.com.quyenbeo.service.OrderService;
-import vn.com.quyenbeo.web.rest.errors.BadRequestAlertException;
-import vn.com.quyenbeo.web.rest.util.HeaderUtil;
-import vn.com.quyenbeo.web.rest.util.PaginationUtil;
-import io.swagger.annotations.ApiParam;
 import io.github.jhipster.web.util.ResponseUtil;
+import io.swagger.annotations.ApiParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -20,11 +11,18 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import vn.com.quyenbeo.config.Constants;
+import vn.com.quyenbeo.domain.Customer;
+import vn.com.quyenbeo.domain.Order;
+import vn.com.quyenbeo.service.CustomerService;
+import vn.com.quyenbeo.service.OrderService;
+import vn.com.quyenbeo.web.rest.errors.BadRequestAlertException;
+import vn.com.quyenbeo.web.rest.util.HeaderUtil;
+import vn.com.quyenbeo.web.rest.util.PaginationUtil;
 
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
-
 import java.util.List;
 import java.util.Optional;
 
