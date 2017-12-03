@@ -38,9 +38,9 @@
                 <td>{{order.productName}}</td>
                 <td>{{order.productDetail}}</td>
                 <td>{{order.productSize}}</td>
-                <td>{{order.productPrice}}</td>
-                <td>{{order.moneyPaid}}</td>
-                <td>{{order.productPrice - order.moneyPaid}}</td>
+                <td>{{order.productPrice  | number:'.3-3'}}</td>
+                <td>{{order.moneyPaid  | number:'.3-3'}}</td>
+                <td>{{order.productPrice - order.moneyPaid  | number:'.3-3'}}</td>
                 <td>{{order.status === 0 ? 'NEW_ORDER' : (order.status === 1 ? 'Đã đặt hàng' : (order.status === 2 ? 'Hàng đã về' : 'Đã gửi khách'))}}</td>
                 <td>{{order.note}}</td>
                 <td>{{order.createdDate | date:'dd/MM/yy HH:mm'}}</td>

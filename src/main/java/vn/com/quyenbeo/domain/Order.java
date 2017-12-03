@@ -27,7 +27,6 @@ public class Order implements Serializable {
     @Field("customer_id")
     private String customerId;
 
-    @NotNull
     @Field("customer_name")
     @TextIndexed
     private String customerName;

@@ -9,6 +9,7 @@ import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 import { Order } from './order.model';
 import { OrderPopupService } from './order-popup.service';
 import { OrderService } from './order.service';
+import { DecimalPipe } from '@angular/common';
 
 @Component({
     selector: 'jhi-order-dialog',
@@ -18,6 +19,12 @@ export class OrderDialogComponent implements OnInit {
 
     order: Order;
     isSaving: boolean;
+    orderStatus = [
+        {id: 0, name: 'NEW_ORDER'},
+        {id: 1, name: 'Đã đặt hàng'},
+        {id: 2, name: 'Hàng đã về'},
+        {id: 3, name: 'Đã gửi hàng'},
+    ];
 
     constructor(
         public activeModal: NgbActiveModal,
