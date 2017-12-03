@@ -23,8 +23,9 @@
             <th jhiSortBy="productSize"><span>Product Size</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="productPrice"><span>Product Price</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="moneyPaid"><span>Money Paid</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="status"><span>Status</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="note"><span>Note</span> <span class="fa fa-sort"></span></th>
+            <th><span>Money Remain</span></th>
+            <th><span>Status</span></span></th>
+            <th><span>Note</span></span></th>
             <th jhiSortBy="lastModifiedBy"><span>Last Modified By</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="lastModifiedDate"><span>Last Modified Date</span> <span class="fa fa-sort"></span></th>
             <th></th>
@@ -39,7 +40,8 @@
                 <td>{{order.productSize}}</td>
                 <td>{{order.productPrice}}</td>
                 <td>{{order.moneyPaid}}</td>
-                <td>{{order.status}}</td>
+                <td>{{order.productPrice - order.moneyPaid}}</td>
+                <td>{{order.status === 0 ? 'NEW_ORDER' : (order.status === 1 ? 'Đã đặt hàng' : (order.status === 2 ? 'Hàng đã về' : 'Đã gửi khách'))}}</td>
                 <td>{{order.note}}</td>
                 <td>{{order.createdDate | date:'dd/MM/yy HH:mm'}}</td>
                 <td>{{order.lastModifiedDate | date:'dd/MM/yy HH:mm'}}</td>

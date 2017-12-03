@@ -23,6 +23,7 @@ currentAccount: any;
     totalItems: any;
     queryCount: any;
     itemsPerPage: any;
+    searchCondition: any;
     page: any;
     predicate: any;
     previousPage: any;
@@ -46,10 +47,16 @@ currentAccount: any;
         });
     }
 
+    search(searchCondition: string) {
+        this.searchCondition = searchCondition;
+        this.loadAll();
+    }
+
     loadAll() {
         this.customerService.query({
             page: this.page - 1,
             size: this.itemsPerPage,
+            searchCondition : this.searchCondition,
             sort: this.sort()}).subscribe(
             (res: ResponseWrapper) => this.onSuccess(res.json, res.headers),
             (res: ResponseWrapper) => this.onError(res.json)
@@ -66,7 +73,8 @@ currentAccount: any;
             {
                 page: this.page,
                 size: this.itemsPerPage,
-                sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
+                sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc'),
+                searchCondition: this.searchCondition
             }
         });
         this.loadAll();
@@ -76,7 +84,7 @@ currentAccount: any;
         this.page = 0;
         this.router.navigate(['/customer', {
             page: this.page,
-            sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
+            sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc'),
         }]);
         this.loadAll();
     }

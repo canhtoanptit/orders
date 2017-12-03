@@ -1,6 +1,7 @@
 package vn.com.quyenbeo.domain;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.TextIndexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 import javax.validation.constraints.*;
@@ -19,12 +20,17 @@ public class Customer implements Serializable {
 
     @NotNull
     @Field("name")
+    @TextIndexed
     private String name;
 
     @Field("facebook")
+    @TextIndexed
+    @NotNull
     private String facebook;
 
     @Field("phone")
+    @TextIndexed
+    @NotNull
     private String phone;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove

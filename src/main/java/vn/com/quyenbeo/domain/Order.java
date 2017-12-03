@@ -1,8 +1,10 @@
 package vn.com.quyenbeo.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.mongodb.core.index.TextIndexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
@@ -27,6 +29,7 @@ public class Order implements Serializable {
 
     @NotNull
     @Field("customer_name")
+    @TextIndexed
     private String customerName;
 
     @NotNull
@@ -35,6 +38,7 @@ public class Order implements Serializable {
 
     @NotNull
     @Field("product_name")
+    @TextIndexed
     private String productName;
 
     @NotNull
@@ -58,6 +62,9 @@ public class Order implements Serializable {
 
     @Field("note")
     private String note;
+
+    @JsonIgnore
+    private boolean delFlag;
 
     @CreatedDate
     @Field("created_date")
@@ -200,6 +207,14 @@ public class Order implements Serializable {
     public Order note(String note) {
         this.note = note;
         return this;
+    }
+
+    public boolean getDelFlag() {
+        return delFlag;
+    }
+
+    public void setDelFlag(boolean delFlag) {
+        this.delFlag = delFlag;
     }
 
     public void setNote(String note) {

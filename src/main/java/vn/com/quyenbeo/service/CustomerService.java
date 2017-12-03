@@ -1,5 +1,6 @@
 package vn.com.quyenbeo.service;
 
+import org.springframework.data.mongodb.core.query.TextCriteria;
 import vn.com.quyenbeo.domain.Customer;
 import vn.com.quyenbeo.repository.CustomerRepository;
 import org.slf4j.Logger;
@@ -7,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import vn.com.quyenbeo.service.util.StringUtils;
 
 
 /**
@@ -40,8 +42,13 @@ public class CustomerService {
      *  @param pageable the pagination information
      *  @return the list of entities
      */
-    public Page<Customer> findAll(Pageable pageable) {
+    public Page<Customer> findAll(String searchCondition, Pageable pageable) {
         log.debug("Request to get all Customers");
+        if (StringUtils.isValidTextCondition(searchCondition)) {
+            TextCriteria criteria = TextCriteria.forDefaultLanguage().matchingAny(searchCondition);
+            return customerRepository.findAllBy(criteria, pageable);
+        }
+
         return customerRepository.findAll(pageable);
     }
 

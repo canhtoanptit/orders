@@ -1,5 +1,8 @@
 package vn.com.quyenbeo.config;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Application constants.
  */
@@ -17,6 +20,7 @@ public final class Constants {
     public static final int DA_NHAN_HANG = 2;
     public static final int DA_GUI_KHACH = 3;
 
+    public static List<Integer> ORDER_STATUS = Arrays.asList(NEW_ORDER, DA_DAT_HANG, DA_NHAN_HANG, DA_GUI_KHACH);
 
     private Constants() {
     }

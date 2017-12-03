@@ -1,15 +1,13 @@
 package vn.com.quyenbeo.service;
 
-import vn.com.quyenbeo.config.Constants;
-import vn.com.quyenbeo.domain.Order;
-import vn.com.quyenbeo.repository.OrderRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.time.Instant;
+import vn.com.quyenbeo.config.Constants;
+import vn.com.quyenbeo.domain.Order;
+import vn.com.quyenbeo.repository.OrderRepository;
 
 
 /**
@@ -39,6 +37,17 @@ public class OrderService {
     }
 
     /**
+     * Save a order.
+     *
+     * @param order the entity to save
+     * @return the persisted entity
+     */
+    public Order update(Order order) {
+        log.debug("Request to save Order : {}", order);
+        return orderRepository.save(order);
+    }
+
+    /**
      *  Get all the orders.
      *
      *  @param pageable the pagination information
@@ -46,7 +55,7 @@ public class OrderService {
      */
     public Page<Order> findAll(Pageable pageable) {
         log.debug("Request to get all Orders");
-        return orderRepository.findAllByOrderByStatusAscLastModifiedDateDesc(pageable);
+        return orderRepository.findAllByDelFlagOrderByStatusAscLastModifiedDateDesc(false, pageable);
     }
 
     /**
@@ -67,6 +76,8 @@ public class OrderService {
      */
     public void delete(String id) {
         log.debug("Request to delete Order : {}", id);
-        orderRepository.delete(id);
+        Order entity = orderRepository.findOne(id);
+        entity.setDelFlag(true);
+        orderRepository.save(entity);
     }
 }

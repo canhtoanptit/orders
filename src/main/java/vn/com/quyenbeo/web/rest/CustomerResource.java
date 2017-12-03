@@ -91,9 +91,9 @@ public class CustomerResource {
      */
     @GetMapping("/customers")
     @Timed
-    public ResponseEntity<List<Customer>> getAllCustomers(@ApiParam Pageable pageable) {
+    public ResponseEntity<List<Customer>> getAllCustomers(@RequestParam(required = false) String searchCondition, @ApiParam Pageable pageable) {
         log.debug("REST request to get a page of Customers");
-        Page<Customer> page = customerService.findAll(pageable);
+        Page<Customer> page = customerService.findAll(searchCondition, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/customers");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

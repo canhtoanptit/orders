@@ -1,7 +1,11 @@
 package vn.com.quyenbeo.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.sun.javaws.exceptions.InvalidArgumentException;
+import vn.com.quyenbeo.config.Constants;
+import vn.com.quyenbeo.domain.Customer;
 import vn.com.quyenbeo.domain.Order;
+import vn.com.quyenbeo.service.CustomerService;
 import vn.com.quyenbeo.service.OrderService;
 import vn.com.quyenbeo.web.rest.errors.BadRequestAlertException;
 import vn.com.quyenbeo.web.rest.util.HeaderUtil;
@@ -37,8 +41,11 @@ public class OrderResource {
 
     private final OrderService orderService;
 
-    public OrderResource(OrderService orderService) {
+    private final CustomerService customerService;
+
+    public OrderResource(OrderService orderService, CustomerService customerService) {
         this.orderService = orderService;
+        this.customerService = customerService;
     }
 
     /**
@@ -55,6 +62,12 @@ public class OrderResource {
         if (order.getId() != null) {
             throw new BadRequestAlertException("A new order cannot already have an ID", ENTITY_NAME, "idexists");
         }
+        // check customer exist
+        Customer customer = customerService.findOne(order.getCustomerId());
+        if (customer == null) {
+            throw new IllegalArgumentException("Customer does not exist");
+        }
+        order.setCustomerName(customer.getName());
         Order result = orderService.save(order);
         return ResponseEntity.created(new URI("/api/orders/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
@@ -75,9 +88,18 @@ public class OrderResource {
     public ResponseEntity<Order> updateOrder(@Valid @RequestBody Order order) throws URISyntaxException {
         log.debug("REST request to update Order : {}", order);
         if (order.getId() == null) {
-            return createOrder(order);
+            throw new BadRequestAlertException("order status not acceptable", "", "");
         }
-        Order result = orderService.save(order);
+        if (!Constants.ORDER_STATUS.contains(order.getStatus())) {
+            throw new BadRequestAlertException("order status not acceptable", "", "");
+        }
+
+        // check customer exist
+        Customer customer = customerService.findOne(order.getCustomerId());
+        if (customer == null) {
+            throw new IllegalArgumentException("Customer does not exist");
+        }
+        Order result = orderService.update(order);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, order.getId().toString()))
             .body(result);
