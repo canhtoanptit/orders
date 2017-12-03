@@ -22,6 +22,7 @@
             <th jhiSortBy="productDetail"><span>Product Detail</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="productSize"><span>Product Size</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="productPrice"><span>Product Price</span> <span class="fa fa-sort"></span></th>
+            <th><span>Number of Product</span></th>
             <th jhiSortBy="moneyPaid"><span>Money Paid</span> <span class="fa fa-sort"></span></th>
             <th><span>Money Remain</span></th>
             <th><span>Status</span></span></th>
@@ -39,6 +40,7 @@
                 <td>{{order.productDetail}}</td>
                 <td>{{order.productSize}}</td>
                 <td>{{order.productPrice  | number:'.3-3'}}</td>
+                <td>{{order.numberOfProduct}}</td>
                 <td>{{order.moneyPaid  | number:'.3-3'}}</td>
                 <td>{{order.productPrice - order.moneyPaid  | number:'.3-3'}}</td>
                 <td>{{order.status === 0 ? 'NEW_ORDER' : (order.status === 1 ? 'Đã đặt hàng' : (order.status === 2 ? 'Hàng đã về' : 'Đã gửi khách'))}}</td>

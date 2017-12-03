@@ -58,16 +58,12 @@
         </div>
         <div class="form-group">
             <label class="form-control-label" for="field_productSize">Product Size</label>
-            <input type="number" class="form-control" name="productSize" id="field_productSize"
+            <input type="text" class="form-control" name="productSize" id="field_productSize"
                 [(ngModel)]="order.productSize" required />
             <div [hidden]="!(editForm.controls.productSize?.dirty && editForm.controls.productSize?.invalid)">
                 <small class="form-text text-danger"
                    [hidden]="!editForm.controls.productSize?.errors?.required">
                    This field is required.
-                </small>
-                <small class="form-text text-danger"
-                    [hidden]="!editForm.controls.productSize?.errors?.number">
-                    This field should be a number.
                 </small>
             </div>
         </div>
@@ -82,6 +78,21 @@
                 </small>
                 <small class="form-text text-danger"
                     [hidden]="!editForm.controls.productPrice?.errors?.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_numberOfProduct">Number of Product</label>
+            <input type="number" class="form-control" name="numberOfProduct" id="field_numberOfProduct"
+                   [(ngModel)]="order.numberOfProduct" required />
+            <div [hidden]="!(editForm.controls.numberOfProduct?.dirty && editForm.controls.numberOfProduct?.invalid)">
+                <small class="form-text text-danger"
+                       [hidden]="!editForm.controls.numberOfProduct?.errors?.required">
+                    This field is required.
+                </small>
+                <small class="form-text text-danger"
+                       [hidden]="!editForm.controls.numberOfProduct?.errors?.number">
                     This field should be a number.
                 </small>
             </div>

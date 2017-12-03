@@ -46,11 +46,15 @@ public class Order implements Serializable {
 
     @NotNull
     @Field("product_size")
-    private Integer productSize;
+    private String productSize;
 
     @NotNull
     @Field("product_price")
     private Integer productPrice;
+
+    @NotNull
+    @Field("product_number")
+    private Integer numberOfProduct;
 
     @NotNull
     @Field("money_paid")
@@ -147,16 +151,16 @@ public class Order implements Serializable {
         this.productDetail = productDetail;
     }
 
-    public Integer getProductSize() {
+    public String getProductSize() {
         return productSize;
     }
 
-    public Order productSize(Integer productSize) {
+    public Order productSize(String productSize) {
         this.productSize = productSize;
         return this;
     }
 
-    public void setProductSize(Integer productSize) {
+    public void setProductSize(String productSize) {
         this.productSize = productSize;
     }
 
@@ -234,6 +238,14 @@ public class Order implements Serializable {
 
     public void setLastModifiedDate(Instant lastModifiedDate) {
         this.lastModifiedDate = lastModifiedDate;
+    }
+
+    public Integer getNumberOfProduct() {
+        return numberOfProduct;
+    }
+
+    public void setNumberOfProduct(Integer numberOfProduct) {
+        this.numberOfProduct = numberOfProduct;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
